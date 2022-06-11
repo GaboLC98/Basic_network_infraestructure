@@ -1,7 +1,7 @@
 # NETWORK #
 # vpc
 resource "aws_vpc" "vpc_1" {
-    cidr_block = "10.0.0.0/16"
+    cidr_block = var.VPC_cidr_block
     enable_dns_hostnames = "true"
 
     tags = {
@@ -20,9 +20,9 @@ resource "aws_internet_gateway" "igw" {
 
 # Public Subnet
 resource "aws_subnet" "public_subnets" {
-    count = 3
+    count = var.subnets_quantity
     vpc_id = aws_vpc.vpc_1.id
-    cidr_block = var.subnet_public_cidr_block[count.index]
+    cidr_block = cidrsubnet(var.VPC_cidr_block,8,count.index+1)
     availability_zone = var.av_zones[count.index]
     map_public_ip_on_launch = "true"
 
@@ -32,7 +32,7 @@ resource "aws_subnet" "public_subnets" {
 }
 # Private Subnet
 resource "aws_subnet" "private_subnets" {
-    count = 3
+    count = var.subnets_quantity
     vpc_id = aws_vpc.vpc_1.id
     cidr_block = var.subnet_private_cidr_block[count.index]
     availability_zone = var.av_zones[count.index]

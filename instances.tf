@@ -3,7 +3,7 @@
 
 # EC2
 resource "aws_instance" "EC2_1" {
-    count = 3 
+    count = var.instance_quantity
     ami = "" #Choice -> Have to select image
     instance_type = "" #Choice -> Have to select instance type (t2.micro, t2.nano, etc)
     subnet_id = aws_subnet.public_subnets[count.index].id
