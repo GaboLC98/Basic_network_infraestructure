@@ -20,6 +20,7 @@ variable "VPC_cidr_block" {
     default = "10.0.0.0/16"
 }
 
+#Dynamic block values
 variable "security" {
     default =  [{
         description = "HTTP"
