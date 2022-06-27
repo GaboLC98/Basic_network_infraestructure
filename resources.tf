@@ -70,7 +70,7 @@ resource "aws_security_group" "security_group_http" {
         from_port = ingress.value["port"]
         to_port = ingress.value["port"]
         protocol=ingress.value["protocol"]
-        cidr_block=ingress.value["cidr_block"]
+        cidr_blocks=ingress.value["cidr_block"]
       }
     }
 
