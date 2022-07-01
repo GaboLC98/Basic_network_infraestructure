@@ -54,7 +54,7 @@ resource "aws_route_table" "rt_1" {
 }
 # Route table association
 resource "aws_route_table_association" "rt_subnet" {
-  count = 3
+  count = var.subnets_quantity
     subnet_id = aws_subnet.public_subnets[count.index].id
     route_table_id = aws_route_table.rt_1.id  
 }
